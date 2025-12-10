@@ -1,4 +1,4 @@
-import { ctx, c } from "./main.js";
+import { getContext, getCanvas } from "./Canvas.js";
 
 import { LoadImage } from "./Utils.js";
 
@@ -26,6 +26,8 @@ export class MapHandler {
     }
 
     render() {
+        const c = getCanvas();
+        const ctx = getContext();
         for (let row = 0; row < this.map.length; row++) {
             for (let col = 0; col < this.map[row].length; col++) {
                 const tileId = this.map[row][col];

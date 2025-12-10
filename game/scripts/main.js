@@ -1,12 +1,11 @@
 import { Player } from "./Player.js";
 import { InputManager } from "./InputManager.js";
 import { MapHandler } from "./MapHandler.js";
-import { createUFO } from "./UFO.js";
 import { checkCollision, LoadImage, LoadJson } from "./Utils.js";
-
-// canvas
-export var c = document.getElementById("gameWindow");
-export var ctx = c.getContext("2d");
+import { getCanvas, getContext } from "./Canvas.js";
+import { ScreenRenderer } from "./ScreenRenderer.js";
+import { WaveManager } from "./WaveManager.js";
+import { UpgradeManager } from "./UpgradeManager.js";
 
 // assets
 export const spritesheets = {
@@ -24,31 +23,40 @@ const player = new Player();
 const EnemyBullets = [];
 const PlayerBullets = [];
 
+// Icons for UI
 const Icons = {
-    trophy: LoadImage("assets/icons/trophy.png")
-}
+    trophy: LoadImage("assets/icons/trophy.png"),
+    death: LoadImage("assets/icons/death.png"),
+    speed: LoadImage("assets/icons/speed.png"),
+    health: LoadImage("assets/icons/health.png"),
+    dodge: LoadImage("assets/icons/dodge.png"),
+    crit: LoadImage("assets/icons/crit.png"),
+    fireRate: LoadImage("assets/icons/fireRate.png"),
+    damage: LoadImage("assets/icons/damage.png")
+};
 
-// buttons
-const upgradeButtons = [
-    { x: c.width / 2 - 210, y: c.height / 2 - 30, width: 120, height: 120 },
-    { x: c.width / 2 - 50, y: c.height / 2 - 30, width: 120, height: 120 },
-    { x: c.width / 2 + 110, y: c.height / 2 - 30, width: 120, height: 120 }
+const possibleUpgrades = [
+    {icon: Icons.speed, name:"Speed", value: 0.4, bgColor: "lightblue"}, 
+    {icon: Icons.health, name:"Max Health", value: 30, bgColor: "lightcoral"}, 
+    {icon: Icons.dodge, name:"Dodge", value: 0.05, bgColor: "lightgreen"},
+    {icon: Icons.crit, name:"Crit Chance", value: 0.05, bgColor: "lightyellow"},
+    {icon: Icons.fireRate, name:"Fire Rate", value: 0.2, bgColor: "lightpink"},
+    {icon: Icons.damage, name:"Damage", value: 5, bgColor: "lightgray"}
 ];
+
+// initialize managers
+const screenRenderer = new ScreenRenderer(Icons);
+const waveManager = new WaveManager(waves);
+const upgradeManager = new UpgradeManager(possibleUpgrades);
 
 // game state
 let score = 0;
-let wave = 0;
-let ufos = [];
-
 let lost = false;
-let outOfWaves = false;
 let homeScreenActive = true;
-let endOfWave = false;
+let gamePaused = false;
+let toggleShooting = false;
 
-// Utility functions
-const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-// bullet management
 export function addEnemyBullet(bullet) {
     EnemyBullets.push(bullet);
 }
@@ -58,119 +66,40 @@ export function addPlayerBullet(bullet) {
 }
 
 export function getScreenActive() {
-    return homeScreenActive || lost || outOfWaves || endOfWave;
+    return homeScreenActive || lost || waveManager.isOutOfWaves() || upgradeManager.isActive();
 }
 
-function drawUpgradeScreen(upgrade1 = {icon: Icons.trophy, name:"Speed", bgColor: "lightblue"}, upgrade2={icon: Icons.trophy, name:"Max Health", bgColor: "lightcoral"}, upgrade3={icon: Icons.trophy, name:"Dodge", bgColor: "lightgreen"}) {
-    ctx.clearRect(0, 0, c.width, c.height);
-
-    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.fillRect(0, 0, c.width, c.height);
-
-
-    ctx.fillStyle = "white";
-    ctx.font = "bold 30px 'Retro Blocky', sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Wave Complete!", c.width / 2, c.height / 2 - 60);
-
-    ctx.font = "bold 20px 'Retro Blocky', sans-serif";
-
-    // upgrade 1
-    ctx.fillStyle = upgrade1.bgColor || "white";
-    ctx.fillRect(upgradeButtons[0].x, upgradeButtons[0].y, upgradeButtons[0].width, upgradeButtons[0].height);
-
-    ctx.drawImage(upgrade1.icon, c.width / 2 - 180, c.height / 2 - 20, 60, 60);
-
-    ctx.fillStyle = upgrade1.textColor || "black";
-    ctx.fillText(upgrade1.name, c.width / 2 - 150, c.height / 2 + 80);
-
-    // upgrade 2
-    ctx.fillStyle = upgrade2.bgColor || "white";
-    ctx.fillRect(upgradeButtons[1].x, upgradeButtons[1].y, upgradeButtons[1].width, upgradeButtons[1].height);
-
-
-    ctx.drawImage(upgrade2.icon, c.width / 2 - 20, c.height / 2 - 20, 60, 60);
-
-    ctx.fillStyle = upgrade2.textColor || "black";
-    ctx.fillText(upgrade2.name, c.width / 2 + 10, c.height / 2 + 80);
-
-    // upgrade 3
-    ctx.fillStyle = upgrade3.bgColor || "white";
-    ctx.fillRect(upgradeButtons[2].x, upgradeButtons[2].y, upgradeButtons[2].width, upgradeButtons[2].height);
-
-    ctx.drawImage(upgrade3.icon, c.width / 2 + 140, c.height / 2 - 20, 60, 60);
-
-    ctx.fillStyle = upgrade3.textColor || "black";
-    ctx.fillText(upgrade3.name, c.width / 2 + 170, c.height / 2 + 80);
+export function isGamePaused() {
+    return gamePaused;
 }
 
-// screen rendering
-function drawFinalScreen() {
-    ctx.clearRect(0, 0, c.width, c.height);
+function resetGame() {
+    score = 0;
+    waveManager.reset();
+    player.maxHealth = 100;
+    player.health = player.maxHealth;
+    player.speedMultiplier = 1;
+    player.dodgeChance = 0.0;
+    player.fireRate = 0.5;
+    player.critChance = 0.0;
+    player.damage = 10;
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.beginPath();
-    ctx.roundRect(c.width / 4, c.height / 4, c.width / 2, c.height / 2, 20);
-    ctx.fill();
-
-    ctx.fillStyle = "white";
-    ctx.font = "bold 30px 'Retro Blocky', sans-serif"
-    ctx.textAlign = "center";
-
-    ctx.drawImage(Icons.trophy, c.width / 2 - 65, c.height / 2 - 125, 60, 60);
-    ctx.drawImage(Icons.trophy, c.width / 2 + 5, c.height / 2 - 125, 60, 60);
-    ctx.drawImage(Icons.trophy, c.width / 2 - 40, c.height / 2 - 145, 80, 80);
-
-    ctx.fillText("Congratulations!", c.width / 2, c.height / 2 - 40);
-    ctx.fillText("You've completed all waves!", c.width / 2, c.height / 2);
-    ctx.fillText(`Final Score: ${score}`, c.width / 2, c.height / 2 + 40);
-    ctx.fillText("Press Enter to Restart", c.width / 2, c.height / 2 + 85);
+    player.x = 100;
+    lost = false;
+    homeScreenActive = false;
+    EnemyBullets.length = 0;
+    PlayerBullets.length = 0;
 }
 
-function drawHomeScreen() {
-    ctx.clearRect(0, 0, c.width, c.height);
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.beginPath();
-    ctx.roundRect(c.width / 4, c.height / 4, c.width / 2, c.height / 2, 20); 
-    ctx.fill();
-
-    ctx.fillStyle = "white";
-    ctx.font = "bold 40px 'Retro Blocky', sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Holiday Hub Shooter", c.width / 2, c.height / 2 - 40);
-    ctx.font = "bold 30px 'Retro Blocky', sans-serif";
-    ctx.fillText("Press Enter to Start", c.width / 2, c.height / 2 + 40);
-}
-
-function drawLostScreen() {
-    ctx.clearRect(0, 0, c.width, c.height);
-
-    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.beginPath();
-    ctx.roundRect(c.width / 4, c.height / 4, c.width / 2, c.height / 2, 20); // 20 = corner radius
-    ctx.fill();
-
-    ctx.fillStyle = "white";
-    ctx.font = "bold 30px 'Retro Blocky', sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Game Over!", c.width / 2, c.height / 2 - 40);
-    ctx.fillText(`Final Score: ${score}`, c.width / 2, c.height / 2);
-    ctx.fillText("Press Enter to Restart", c.width / 2, c.height / 2 + 60);
-}
-
-// game screen
+// game screen rendering
 function draw() {
+    const c = getCanvas();
+    const ctx = getContext();
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // draw score
-    ctx.fillStyle = "white";
-    ctx.font = "bold 23px 'Retro Blocky', sans-serif";
-    ctx.textAlign = "left";
-    ctx.fillText(`Score: ${score}`, 10, 20);
-
-    ctx.textAlign = "center";
-    ctx.fillText(`Wave: ${wave}`, c.width / 2, 50);
+    // draw HUD
+    screenRenderer.drawHud(score, waveManager.getWaveNumber());
 
     // draw bullets
     PlayerBullets.forEach(bullet => bullet.draw());
@@ -179,36 +108,36 @@ function draw() {
     // draw map and entities
     mapHandler.render();
     player.draw();
-    ufos.forEach(ufo => {
+    waveManager.getUfos().forEach(ufo => {
         ufo.update();
         ufo.draw();
     });
 }
 
+
 // input handling
-c.addEventListener("click", (e) => {
+getCanvas().addEventListener("click", (e) => {
+    if (!upgradeManager.isActive()) return;
 
-    if (!endOfWave) return;
-
+    const c = getCanvas();
     const rect = c.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    upgradeButtons.forEach(btn => {
-        if (
-            mouseX >= btn.x &&
-            mouseX <= btn.x + btn.width &&
-            mouseY >= btn.y &&
-            mouseY <= btn.y + btn.height
-        ) {
-            // console.log(`Upgrade clicked: ${btn.name}`);
-            // applyUpgrade(btn.name); // call your function to apply the upgrade
-            endOfWave = false;
-        }
-    });
+    upgradeManager.handleClick(mouseX, mouseY, player);
 });
 
 function handlePlayerInput() {
+    if (inputManager.isKeyPressed('Escape')) {
+        gamePaused = !gamePaused;
+    }
+
+    if (gamePaused) return;
+
+    if (inputManager.isKeyPressed('T')) {
+        toggleShooting = !toggleShooting;
+    }
+
     if (inputManager.isKeyDown('A') || inputManager.isKeyDown('ArrowLeft')) {
         player.move(-1, 0);
         player.curAnimation = 1;
@@ -221,21 +150,10 @@ function handlePlayerInput() {
 
     // restart the game
     if (inputManager.isKeyDown('Enter')) {
-        if (lost || outOfWaves) {
-            // reset game
-            score = 0;
-            wave = 0;
-            ufos.forEach(ufo => ufo.cleanup());
-            ufos = [];
-            player.health = player.maxHealth;
-            player.x = 100;
-            lost = false;
-            outOfWaves = false;
-            homeScreenActive = false;
+        if (lost || waveManager.isOutOfWaves()) {
+            resetGame();
         } else if (homeScreenActive) {
             homeScreenActive = false;
-        } else if (endOfWave) {
-            endOfWave = false;
         }
     }
 
@@ -249,51 +167,26 @@ function handlePlayerInput() {
     }
 }
 
-// Wave manager
-function spawnWave() {
-    if (ufos.length > 0) return;
-
-    // empty lists
-    EnemyBullets.length = 0;
-    PlayerBullets.length = 0;
-
-    const waveData = waves[wave];
-
-    if (!waveData) {
-        outOfWaves = true;
-        return;
-    }
-
-    waveData.enemies.forEach(enemy => {
-        const { level, type, count } = enemy;
-
-        if (type === "UFO") {
-            for (let i = 0; i < count; i++) {
-                ufos.push(createUFO(level, random(0, c.width - 80)));
-            }
-        }
-    });
-
-    if (wave !== 0) endOfWave = true;
-
-    wave++;
-}
-
-// collision
+// collision handling
 function updatePlayerBullets() {
+    const c = getCanvas();
     PlayerBullets.forEach((bullet, index) => {
         bullet.update();
 
         // check collisions with UFO
-        ufos.forEach((ufo, ufoIndex) => {
+        waveManager.getUfos().forEach((ufo, ufoIndex) => {
             if (checkCollision(bullet, ufo)) {
-                ufo.health -= 10;
+                if (player.critChance > Math.random()) {
+                    ufo.health -= player.damage * 2; // critical hit
+                } else {
+                    ufo.health -= player.damage;
+                }
                 PlayerBullets.splice(index, 1);
 
                 if (ufo.health <= 0) {
                     ufo.cleanup();
                     score += ufo.scoreValue;
-                    ufos.splice(ufoIndex, 1);
+                    waveManager.getUfos().splice(ufoIndex, 1);
                 }
             }
         });
@@ -306,11 +199,18 @@ function updatePlayerBullets() {
 }
 
 function updateEnemyBullets() {
+    const c = getCanvas();
     EnemyBullets.forEach((bullet, index) => {
         bullet.update();
 
         // check collision with player
         if (checkCollision(bullet, player)) {
+            player.dodgeChance = Math.min(player.dodgeChance, 0.9);
+            if (Math.random() < player.dodgeChance) {
+                // dodged
+                EnemyBullets.splice(index, 1);
+                return;
+            }
             player.hit(10);
             EnemyBullets.splice(index, 1);
         }
@@ -322,51 +222,67 @@ function updateEnemyBullets() {
     });
 }
 
-// game loop (20 FPS)
+
+// main game loop (20 FPS)
 setInterval(() => {
     if (!document.hasFocus()) return;
 
     handlePlayerInput();
-    spawnWave();
-    updatePlayerBullets();
-    updateEnemyBullets();
-
-
-    if (endOfWave) {
-        drawUpgradeScreen();
-        return;
-    }
-
+    
+    // render home screen first
     if (homeScreenActive) {
-        drawHomeScreen();
-        return
-    }
-
-    if (outOfWaves) {
-        drawFinalScreen();
+        screenRenderer.drawHomeScreen();
         return;
     }
 
-    if (!lost) {
-        if (player.health <= 0) {
-            lost = true;
-            drawLostScreen();
-        }
-        draw();
+    if (gamePaused) {
+        return;
+    }
+
+    // render based on game state
+    if (upgradeManager.isActive()) {
+        upgradeManager.draw();
+        return;
+    }
+
+    if (waveManager.isOutOfWaves()) {
+        screenRenderer.drawFinalScreen(score);
+        return;
+    }
+
+    if (player.health <= 0) {
+        lost = true;
+        screenRenderer.drawLostScreen(score);
+        return;
+    }
+
+    if (lost) {
+        screenRenderer.drawLostScreen(score);
         return;
     }
     
-    if (lost) {
-        drawLostScreen();
-        return;
+    // spawn wave and handle upgrades
+    const waveResult = waveManager.spawnNextWave();
+    if (waveResult.upgradeOffered) {
+        upgradeManager.startSelection();
     }
+
+    updatePlayerBullets();
+    updateEnemyBullets();
+
+    draw();
 }, 1000 / 20);
 
-// Shooting interval (every 300ms)
-setInterval(() => {
-    if (!document.hasFocus()) return;
-
-    if (inputManager.isKeyDown(' ') || inputManager.isKeyDown('Space')) {
+function fireLoop() {
+    if (document.hasFocus() &&
+        !gamePaused &&
+        !homeScreenActive &&
+        !waveManager.isOutOfWaves() &&
+        !upgradeManager.isActive() &&
+        !lost &&
+        ((inputManager.isKeyDown(" ") || inputManager.isKeyDown("Space")) || toggleShooting)) {
         player.shoot();
     }
-}, 300);
+    setTimeout(fireLoop, Math.max(100, 300 / player.fireRate));
+}
+fireLoop();

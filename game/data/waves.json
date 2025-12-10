@@ -1,101 +1,102 @@
 [
-    {
-        "level": 1,
-        "enemies": [
-            { "type": "UFO", "level": 2, "count": 1 },
-            { "type": "UFO", "level": 3, "count": 1 }
-        ]
-    },
-    {
-        "level": 2,
-        "enemies": [
-            { "type": "UFO", "level": 4, "count": 1 },
-            { "type": "UFO", "level": 3, "count": 1 }
-        ]
-    },
-    {
-        "level": 3,
-        "enemies": [
-            { "type": "UFO", "level": 7, "count": 1 },
-            { "type": "UFO", "level": 5, "count": 1 },
-            { "type": "UFO", "level": 3, "count": 1 }
-        ]
-    },
-    {
-        "level": 4,
-        "enemies": [
-            { "type": "UFO", "level": 6, "count": 2 },
-            { "type": "UFO", "level": 4, "count": 1 }
-        ]
-    },
-    {
-        "level": 5,
-        "enemies": [
-            { "type": "UFO", "level": 8, "count": 2 },
-            { "type": "UFO", "level": 5, "count": 2 }
-        ]
-    },
-    {
-        "level": 6,
-        "enemies": [
-            { "type": "UFO", "level": 10, "count": 1 },
-            { "type": "UFO", "level": 7, "count": 2 },
-            { "type": "UFO", "level": 4, "count": 1 }
-        ]
-    },
-    {
-        "level": 7,
-        "enemies": [
-            { "type": "UFO", "level": 12, "count": 1 },
-            { "type": "UFO", "level": 9, "count": 2 },
-            { "type": "UFO", "level": 6, "count": 2 }
-        ]
-    },
-    {
-        "level": 8,
-        "enemies": [
-            { "type": "UFO", "level": 12, "count": 2 },
-            { "type": "UFO", "level": 9, "count": 2 },
-            { "type": "UFO", "level": 6, "count": 2 }
-        ]
-    },
-    {
-        "level": 9,
-        "enemies": [
-            { "type": "UFO", "level": 17, "count": 1 },
-            { "type": "UFO", "level": 12, "count": 2 }
-        ]
-    },
-    {
-        "level": 10,
-        "enemies": [
-            { "type": "UFO", "level": 15, "count": 1 },
-            { "type": "UFO", "level": 14, "count": 2 },
-            { "type": "UFO", "level": 10, "count": 2 }
-        ]
-    },
-    {
-        "level": 11,
-        "enemies": [
-            { "type": "UFO", "level": 11, "count": 3 },
-            { "type": "UFO", "level": 10, "count": 1 },
-            { "type": "UFO", "level": 5, "count": 2 }
-        ]
-    },
-    {
-        "level": 12,
-        "enemies": [
-            { "type": "UFO", "level": 15, "count": 2 },
-            { "type": "UFO", "level": 14, "count": 1 },
-            { "type": "UFO", "level": 10, "count": 1 }
-        ]
-    },
-    {
-        "level": 13,
-        "enemies": [
-            { "type": "UFO", "level": 20, "count": 1 },
-            { "type": "UFO", "level": 12, "count": 1 },
-            { "type": "UFO", "level": 10, "count": 1 }
-        ]
-    }
+  {"level":1,"enemies":[{"type":"UFO","level":1,"count":1},{"type":"UFO","level":2,"count":1}]},
+  {"level":2,"enemies":[{"type":"UFO","level":2,"count":2},{"type":"UFO","level":3,"count":1}]},
+  {"level":3,"enemies":[{"type":"UFO","level":3,"count":1},{"type":"UFO","level":2,"count":1},{"type":"UFO","level":3,"count":1}]},
+  {"level":4,"enemies":[{"type":"UFO","level":4,"count":2},{"type":"UFO","level":3,"count":1}]},
+  {"level":5,"enemies":[{"type":"UFO","level":5,"count":2},{"type":"UFO","level":4,"count":2}]},
+  {"level":6,"enemies":[{"type":"UFO","level":6,"count":1},{"type":"UFO","level":5,"count":2},{"type":"UFO","level":3,"count":1}]},
+  {"level":7,"enemies":[{"type":"UFO","level":7,"count":2},{"type":"UFO","level":5,"count":2},{"type":"UFO","level":4,"count":1}]},
+  {"level":8,"enemies":[{"type":"UFO","level":8,"count":2},{"type":"UFO","level":6,"count":2},{"type":"UFO","level":5,"count":2}]},
+  {"level":9,"enemies":[{"type":"UFO","level":9,"count":1},{"type":"UFO","level":7,"count":2},{"type":"UFO","level":5,"count":1}]},
+  {"level":10,"enemies":[{"type":"UFO","level":10,"count":2},{"type":"UFO","level":8,"count":2},{"type":"UFO","level":6,"count":2}]},
+  {"level":11,"enemies":[{"type":"UFO","level":11,"count":1},{"type":"UFO","level":9,"count":3},{"type":"UFO","level":7,"count":1}]},
+  {"level":12,"enemies":[{"type":"UFO","level":12,"count":2},{"type":"UFO","level":10,"count":2},{"type":"UFO","level":8,"count":1}]},
+  {"level":13,"enemies":[{"type":"UFO","level":13,"count":1},{"type":"UFO","level":11,"count":2},{"type":"UFO","level":9,"count":2}]},
+  {"level":14,"enemies":[{"type":"UFO","level":14,"count":2},{"type":"UFO","level":12,"count":2},{"type":"UFO","level":10,"count":2}]},
+  {"level":15,"enemies":[{"type":"UFO","level":15,"count":1},{"type":"UFO","level":13,"count":3},{"type":"UFO","level":11,"count":2}]},
+  {"level":16,"enemies":[{"type":"UFO","level":16,"count":2},{"type":"UFO","level":14,"count":2},{"type":"UFO","level":12,"count":2}]},
+  {"level":17,"enemies":[{"type":"UFO","level":17,"count":1},{"type":"UFO","level":15,"count":2},{"type":"UFO","level":13,"count":3}]},
+  {"level":18,"enemies":[{"type":"UFO","level":18,"count":2},{"type":"UFO","level":16,"count":2},{"type":"UFO","level":14,"count":2}]},
+  {"level":19,"enemies":[{"type":"UFO","level":19,"count":1},{"type":"UFO","level":17,"count":2},{"type":"UFO","level":15,"count":3}]},
+  {"level":20,"enemies":[{"type":"UFO","level":20,"count":2},{"type":"UFO","level":18,"count":2},{"type":"UFO","level":16,"count":2}]},
+  {"level":21,"enemies":[{"type":"UFO","level":21,"count":1},{"type":"UFO","level":19,"count":3},{"type":"UFO","level":17,"count":2}]},
+  {"level":22,"enemies":[{"type":"UFO","level":22,"count":2},{"type":"UFO","level":20,"count":2},{"type":"UFO","level":18,"count":2}]},
+  {"level":23,"enemies":[{"type":"UFO","level":23,"count":1},{"type":"UFO","level":21,"count":3},{"type":"UFO","level":19,"count":2}]},
+  {"level":24,"enemies":[{"type":"UFO","level":24,"count":2},{"type":"UFO","level":22,"count":2},{"type":"UFO","level":20,"count":2}]},
+  {"level":25,"enemies":[{"type":"UFO","level":25,"count":1},{"type":"UFO","level":23,"count":3},{"type":"UFO","level":21,"count":2}]},
+  {"level":26,"enemies":[{"type":"UFO","level":26,"count":2},{"type":"UFO","level":24,"count":2},{"type":"UFO","level":22,"count":2}]},
+  {"level":27,"enemies":[{"type":"UFO","level":27,"count":1},{"type":"UFO","level":25,"count":3},{"type":"UFO","level":23,"count":2}]},
+  {"level":28,"enemies":[{"type":"UFO","level":28,"count":2},{"type":"UFO","level":26,"count":2},{"type":"UFO","level":24,"count":2}]},
+  {"level":29,"enemies":[{"type":"UFO","level":29,"count":1},{"type":"UFO","level":27,"count":3},{"type":"UFO","level":25,"count":2}]},
+  {"level":30,"enemies":[{"type":"UFO","level":30,"count":2},{"type":"UFO","level":28,"count":2},{"type":"UFO","level":26,"count":2}]},
+  {"level":31,"enemies":[{"type":"UFO","level":31,"count":1},{"type":"UFO","level":29,"count":3},{"type":"UFO","level":27,"count":2}]},
+  {"level":32,"enemies":[{"type":"UFO","level":32,"count":2},{"type":"UFO","level":30,"count":2},{"type":"UFO","level":28,"count":2}]},
+  {"level":33,"enemies":[{"type":"UFO","level":33,"count":1},{"type":"UFO","level":31,"count":3},{"type":"UFO","level":29,"count":2}]},
+  {"level":34,"enemies":[{"type":"UFO","level":34,"count":2},{"type":"UFO","level":32,"count":2},{"type":"UFO","level":30,"count":2}]},
+  {"level":35,"enemies":[{"type":"UFO","level":35,"count":1},{"type":"UFO","level":33,"count":3},{"type":"UFO","level":31,"count":2}]},
+  {"level":36,"enemies":[{"type":"UFO","level":36,"count":2},{"type":"UFO","level":34,"count":2},{"type":"UFO","level":32,"count":2}]},
+  {"level":37,"enemies":[{"type":"UFO","level":37,"count":1},{"type":"UFO","level":35,"count":3},{"type":"UFO","level":33,"count":2}]},
+  {"level":38,"enemies":[{"type":"UFO","level":38,"count":2},{"type":"UFO","level":36,"count":2},{"type":"UFO","level":34,"count":2}]},
+  {"level":39,"enemies":[{"type":"UFO","level":39,"count":1},{"type":"UFO","level":37,"count":3},{"type":"UFO","level":35,"count":2}]},
+  {"level":40,"enemies":[{"type":"UFO","level":40,"count":2},{"type":"UFO","level":38,"count":2},{"type":"UFO","level":36,"count":2}]},
+  {"level":41,"enemies":[{"type":"UFO","level":41,"count":1},{"type":"UFO","level":39,"count":3},{"type":"UFO","level":37,"count":2}]},
+  {"level":42,"enemies":[{"type":"UFO","level":42,"count":2},{"type":"UFO","level":40,"count":2},{"type":"UFO","level":38,"count":2}]},
+  {"level":43,"enemies":[{"type":"UFO","level":43,"count":1},{"type":"UFO","level":41,"count":3},{"type":"UFO","level":39,"count":2}]},
+  {"level":44,"enemies":[{"type":"UFO","level":44,"count":2},{"type":"UFO","level":42,"count":2},{"type":"UFO","level":40,"count":2}]},
+  {"level":45,"enemies":[{"type":"UFO","level":45,"count":1},{"type":"UFO","level":43,"count":3},{"type":"UFO","level":41,"count":2}]},
+  {"level":46,"enemies":[{"type":"UFO","level":46,"count":2},{"type":"UFO","level":44,"count":2},{"type":"UFO","level":42,"count":2}]},
+  {"level":47,"enemies":[{"type":"UFO","level":47,"count":1},{"type":"UFO","level":45,"count":3},{"type":"UFO","level":43,"count":2}]},
+  {"level":48,"enemies":[{"type":"UFO","level":48,"count":2},{"type":"UFO","level":46,"count":2},{"type":"UFO","level":44,"count":2}]},
+  {"level":49,"enemies":[{"type":"UFO","level":49,"count":1},{"type":"UFO","level":47,"count":3},{"type":"UFO","level":45,"count":2}]},
+  {"level":50,"enemies":[{"type":"UFO","level":50,"count":2},{"type":"UFO","level":48,"count":2},{"type":"UFO","level":46,"count":2}]},
+  {"level":51,"enemies":[{"type":"UFO","level":51,"count":1},{"type":"UFO","level":49,"count":3},{"type":"UFO","level":47,"count":2}]},
+  {"level":52,"enemies":[{"type":"UFO","level":52,"count":2},{"type":"UFO","level":50,"count":2},{"type":"UFO","level":48,"count":2}]},
+  {"level":53,"enemies":[{"type":"UFO","level":53,"count":1},{"type":"UFO","level":51,"count":3},{"type":"UFO","level":49,"count":2}]},
+  {"level":54,"enemies":[{"type":"UFO","level":54,"count":2},{"type":"UFO","level":52,"count":2},{"type":"UFO","level":50,"count":2}]},
+  {"level":55,"enemies":[{"type":"UFO","level":55,"count":1},{"type":"UFO","level":53,"count":3},{"type":"UFO","level":51,"count":2}]},
+  {"level":56,"enemies":[{"type":"UFO","level":56,"count":2},{"type":"UFO","level":54,"count":2},{"type":"UFO","level":52,"count":2}]},
+  {"level":57,"enemies":[{"type":"UFO","level":57,"count":1},{"type":"UFO","level":55,"count":3},{"type":"UFO","level":53,"count":2}]},
+  {"level":58,"enemies":[{"type":"UFO","level":58,"count":2},{"type":"UFO","level":56,"count":2},{"type":"UFO","level":54,"count":2}]},
+  {"level":59,"enemies":[{"type":"UFO","level":59,"count":1},{"type":"UFO","level":57,"count":3},{"type":"UFO","level":55,"count":2}]},
+  {"level":60,"enemies":[{"type":"UFO","level":60,"count":2},{"type":"UFO","level":58,"count":2},{"type":"UFO","level":56,"count":2}]},
+  {"level":61,"enemies":[{"type":"UFO","level":61,"count":1},{"type":"UFO","level":59,"count":3},{"type":"UFO","level":57,"count":2}]},
+  {"level":62,"enemies":[{"type":"UFO","level":62,"count":2},{"type":"UFO","level":60,"count":2},{"type":"UFO","level":58,"count":2}]},
+  {"level":63,"enemies":[{"type":"UFO","level":63,"count":1},{"type":"UFO","level":61,"count":3},{"type":"UFO","level":59,"count":2}]},
+  {"level":64,"enemies":[{"type":"UFO","level":64,"count":2},{"type":"UFO","level":62,"count":2},{"type":"UFO","level":60,"count":2}]},
+  {"level":65,"enemies":[{"type":"UFO","level":65,"count":1},{"type":"UFO","level":63,"count":3},{"type":"UFO","level":61,"count":2}]},
+  {"level":66,"enemies":[{"type":"UFO","level":66,"count":2},{"type":"UFO","level":64,"count":2},{"type":"UFO","level":62,"count":2}]},
+  {"level":67,"enemies":[{"type":"UFO","level":67,"count":1},{"type":"UFO","level":65,"count":3},{"type":"UFO","level":63,"count":2}]},
+  {"level":68,"enemies":[{"type":"UFO","level":68,"count":2},{"type":"UFO","level":66,"count":2},{"type":"UFO","level":64,"count":2}]},
+  {"level":69,"enemies":[{"type":"UFO","level":69,"count":1},{"type":"UFO","level":67,"count":3},{"type":"UFO","level":65,"count":2}]},
+  {"level":70,"enemies":[{"type":"UFO","level":70,"count":2},{"type":"UFO","level":68,"count":2},{"type":"UFO","level":66,"count":2}]},
+  {"level":71,"enemies":[{"type":"UFO","level":71,"count":1},{"type":"UFO","level":69,"count":3},{"type":"UFO","level":67,"count":2}]},
+  {"level":72,"enemies":[{"type":"UFO","level":72,"count":2},{"type":"UFO","level":70,"count":2},{"type":"UFO","level":68,"count":2}]},
+  {"level":73,"enemies":[{"type":"UFO","level":73,"count":1},{"type":"UFO","level":71,"count":3},{"type":"UFO","level":69,"count":2}]},
+  {"level":74,"enemies":[{"type":"UFO","level":74,"count":2},{"type":"UFO","level":72,"count":2},{"type":"UFO","level":70,"count":2}]},
+  {"level":75,"enemies":[{"type":"UFO","level":75,"count":1},{"type":"UFO","level":73,"count":3},{"type":"UFO","level":71,"count":2}]},
+  {"level":76,"enemies":[{"type":"UFO","level":76,"count":2},{"type":"UFO","level":74,"count":2},{"type":"UFO","level":72,"count":2}]},
+  {"level":77,"enemies":[{"type":"UFO","level":77,"count":1},{"type":"UFO","level":75,"count":3},{"type":"UFO","level":73,"count":2}]},
+  {"level":78,"enemies":[{"type":"UFO","level":78,"count":2},{"type":"UFO","level":76,"count":2},{"type":"UFO","level":74,"count":2}]},
+  {"level":79,"enemies":[{"type":"UFO","level":79,"count":1},{"type":"UFO","level":77,"count":3},{"type":"UFO","level":75,"count":2}]},
+  {"level":80,"enemies":[{"type":"UFO","level":80,"count":2},{"type":"UFO","level":78,"count":2},{"type":"UFO","level":76,"count":2}]},
+  {"level":81,"enemies":[{"type":"UFO","level":81,"count":1},{"type":"UFO","level":79,"count":3},{"type":"UFO","level":77,"count":2}]},
+  {"level":82,"enemies":[{"type":"UFO","level":82,"count":2},{"type":"UFO","level":80,"count":2},{"type":"UFO","level":78,"count":2}]},
+  {"level":83,"enemies":[{"type":"UFO","level":83,"count":1},{"type":"UFO","level":81,"count":3},{"type":"UFO","level":79,"count":2}]},
+  {"level":84,"enemies":[{"type":"UFO","level":84,"count":2},{"type":"UFO","level":82,"count":2},{"type":"UFO","level":80,"count":2}]},
+  {"level":85,"enemies":[{"type":"UFO","level":85,"count":1},{"type":"UFO","level":83,"count":3},{"type":"UFO","level":81,"count":2}]},
+  {"level":86,"enemies":[{"type":"UFO","level":86,"count":2},{"type":"UFO","level":84,"count":2},{"type":"UFO","level":82,"count":2}]},
+  {"level":87,"enemies":[{"type":"UFO","level":87,"count":1},{"type":"UFO","level":85,"count":3},{"type":"UFO","level":83,"count":2}]},
+  {"level":88,"enemies":[{"type":"UFO","level":88,"count":2},{"type":"UFO","level":86,"count":2},{"type":"UFO","level":84,"count":2}]},
+  {"level":89,"enemies":[{"type":"UFO","level":89,"count":1},{"type":"UFO","level":87,"count":3},{"type":"UFO","level":85,"count":2}]},
+  {"level":90,"enemies":[{"type":"UFO","level":90,"count":2},{"type":"UFO","level":88,"count":2},{"type":"UFO","level":86,"count":2}]},
+  {"level":91,"enemies":[{"type":"UFO","level":91,"count":1},{"type":"UFO","level":89,"count":3},{"type":"UFO","level":87,"count":2}]},
+  {"level":92,"enemies":[{"type":"UFO","level":92,"count":2},{"type":"UFO","level":90,"count":2},{"type":"UFO","level":88,"count":2}]},
+  {"level":93,"enemies":[{"type":"UFO","level":93,"count":1},{"type":"UFO","level":91,"count":3},{"type":"UFO","level":89,"count":2}]},
+  {"level":94,"enemies":[{"type":"UFO","level":94,"count":2},{"type":"UFO","level":92,"count":2},{"type":"UFO","level":90,"count":2}]},
+  {"level":95,"enemies":[{"type":"UFO","level":95,"count":1},{"type":"UFO","level":93,"count":3},{"type":"UFO","level":91,"count":2}]},
+  {"level":96,"enemies":[{"type":"UFO","level":96,"count":2},{"type":"UFO","level":94,"count":2},{"type":"UFO","level":92,"count":2}]},
+  {"level":97,"enemies":[{"type":"UFO","level":97,"count":1},{"type":"UFO","level":95,"count":3},{"type":"UFO","level":93,"count":2}]},
+  {"level":98,"enemies":[{"type":"UFO","level":98,"count":2},{"type":"UFO","level":96,"count":2},{"type":"UFO","level":94,"count":2}]},
+  {"level":99,"enemies":[{"type":"UFO","level":99,"count":1},{"type":"UFO","level":97,"count":3},{"type":"UFO","level":95,"count":2}]},
+  {"level":100,"enemies":[{"type":"UFO","level":100,"count":2},{"type":"UFO","level":98,"count":2},{"type":"UFO","level":96,"count":2}]}
 ]

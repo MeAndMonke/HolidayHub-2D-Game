@@ -1,4 +1,4 @@
-import { ctx } from "./main.js";
+import { getContext } from "./Canvas.js";
 
 export class Entity {
     constructor(x, y, width, height, sprite, scale=1) {
@@ -18,6 +18,7 @@ export class Entity {
     }
 
     draw() {
+        const ctx = getContext();
         ctx.drawImage(this.sprite, this.x, this.y, this.width * this.scale, this.height * this.scale);
     }
 }

@@ -1,4 +1,5 @@
-import { ctx, c, spritesheets, addPlayerBullet } from "./main.js";
+import { getContext, getCanvas } from "./Canvas.js";
+import { spritesheets, addPlayerBullet } from "./main.js";
 import { Bullet } from "./Bullet.js";
 import { LoadImage } from "./Utils.js";
 
@@ -10,13 +11,20 @@ export class Player {
         this.maxHealth = 100;
         this.health = this.maxHealth;
 
+        const c = getCanvas();
         this.x = 100;
         this.y = c.height - 215;
         this.width = 26 * 3;
         this.height = 37 * 3;
 
         this.scale = 1;
-        this.movementMultiplier = 15;
+        this.moveSpeed = 10;
+        this.movementMultiplier = 1;
+
+        this.fireRate = 0.5;
+        this.critChance = 0.0;
+        this.dodgeChance = 0.0;
+        this.damage = 10;
         
         // animations n stuff
         this.curFrame = 0;
@@ -25,12 +33,12 @@ export class Player {
     }
 
     move(xDir, yDir) {
-
+        const c = getCanvas();
         if (this.x < 0) this.x = 0;
         if (this.x > c.width - this.width * this.scale) this.x = c.width - this.width * this.scale;
 
-        this.x += xDir * this.movementMultiplier;
-        this.y += yDir * this.movementMultiplier;
+        this.x += xDir * this.moveSpeed * this.movementMultiplier;
+        this.y += yDir * this.moveSpeed * this.movementMultiplier;
     }
 
     shoot() {
@@ -38,8 +46,46 @@ export class Player {
         addPlayerBullet(bullet);
     }
 
-    draw() {
+    upgrade(upgradeType, value) {
+        switch (upgradeType) {
+            case "Speed":
+                console.log("Upgrading Speed by", value);
+                this.movementMultiplier += value;
+                break;
 
+            case "Max Health":
+                console.log("Upgrading Max Health by", value);
+                this.maxHealth += value;
+                this.health += value;
+                break;
+
+            case "Dodge":
+                console.log("Upgrading Dodge Chance by", value);
+                this.dodgeChance += value;
+                break;
+
+            case "Crit Chance":
+                console.log("Upgrading Crit Chance by", value);
+                this.critChance = (this.critChance || 0) + value;
+                break;
+
+            case "Fire Rate":
+                console.log("Upgrading Fire Rate by", value);
+                this.fireRate = (this.fireRate || 0) + value;
+                break;
+            
+            case "Damage":
+                console.log("Upgrading Damage by", value);
+                this.damage += value;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    draw() {
+        const ctx = getContext();
         this.curFrame++;
         if (this.curFrame > 2) {
             this.curFrame = 0;
