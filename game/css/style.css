@@ -1,0 +1,26 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+#gameWindow {
+    border: 1px solid black;
+    background-image: url("/assets/BG.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    margin: 20px auto;
+}
+
+.gameContainer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: url("/assets/gameContainerBG.png");
+    height: auto;
+    width: 100vw;
+}

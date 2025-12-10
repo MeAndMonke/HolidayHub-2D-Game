@@ -1,0 +1,101 @@
+[
+    {
+        "level": 1,
+        "enemies": [
+            { "type": "UFO", "level": 2, "count": 1 },
+            { "type": "UFO", "level": 3, "count": 1 }
+        ]
+    },
+    {
+        "level": 2,
+        "enemies": [
+            { "type": "UFO", "level": 4, "count": 1 },
+            { "type": "UFO", "level": 3, "count": 1 }
+        ]
+    },
+    {
+        "level": 3,
+        "enemies": [
+            { "type": "UFO", "level": 7, "count": 1 },
+            { "type": "UFO", "level": 5, "count": 1 },
+            { "type": "UFO", "level": 3, "count": 1 }
+        ]
+    },
+    {
+        "level": 4,
+        "enemies": [
+            { "type": "UFO", "level": 6, "count": 2 },
+            { "type": "UFO", "level": 4, "count": 1 }
+        ]
+    },
+    {
+        "level": 5,
+        "enemies": [
+            { "type": "UFO", "level": 8, "count": 2 },
+            { "type": "UFO", "level": 5, "count": 2 }
+        ]
+    },
+    {
+        "level": 6,
+        "enemies": [
+            { "type": "UFO", "level": 10, "count": 1 },
+            { "type": "UFO", "level": 7, "count": 2 },
+            { "type": "UFO", "level": 4, "count": 1 }
+        ]
+    },
+    {
+        "level": 7,
+        "enemies": [
+            { "type": "UFO", "level": 12, "count": 1 },
+            { "type": "UFO", "level": 9, "count": 2 },
+            { "type": "UFO", "level": 6, "count": 2 }
+        ]
+    },
+    {
+        "level": 8,
+        "enemies": [
+            { "type": "UFO", "level": 12, "count": 2 },
+            { "type": "UFO", "level": 9, "count": 2 },
+            { "type": "UFO", "level": 6, "count": 2 }
+        ]
+    },
+    {
+        "level": 9,
+        "enemies": [
+            { "type": "UFO", "level": 17, "count": 1 },
+            { "type": "UFO", "level": 12, "count": 2 }
+        ]
+    },
+    {
+        "level": 10,
+        "enemies": [
+            { "type": "UFO", "level": 15, "count": 1 },
+            { "type": "UFO", "level": 14, "count": 2 },
+            { "type": "UFO", "level": 10, "count": 2 }
+        ]
+    },
+    {
+        "level": 11,
+        "enemies": [
+            { "type": "UFO", "level": 11, "count": 3 },
+            { "type": "UFO", "level": 10, "count": 1 },
+            { "type": "UFO", "level": 5, "count": 2 }
+        ]
+    },
+    {
+        "level": 12,
+        "enemies": [
+            { "type": "UFO", "level": 15, "count": 2 },
+            { "type": "UFO", "level": 14, "count": 1 },
+            { "type": "UFO", "level": 10, "count": 1 }
+        ]
+    },
+    {
+        "level": 13,
+        "enemies": [
+            { "type": "UFO", "level": 20, "count": 1 },
+            { "type": "UFO", "level": 12, "count": 1 },
+            { "type": "UFO", "level": 10, "count": 1 }
+        ]
+    }
+]
