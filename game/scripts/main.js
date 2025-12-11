@@ -228,8 +228,12 @@ setInterval(() => {
     if (!document.hasFocus()) return;
 
     handlePlayerInput();
-    
-    // render home screen first
+
+    if (lost) {
+        screenRenderer.drawLostScreen(score);
+        return;
+    }
+
     if (homeScreenActive) {
         screenRenderer.drawHomeScreen();
         return;
@@ -239,7 +243,6 @@ setInterval(() => {
         return;
     }
 
-    // render based on game state
     if (upgradeManager.isActive()) {
         upgradeManager.draw();
         return;
@@ -252,11 +255,6 @@ setInterval(() => {
 
     if (player.health <= 0) {
         lost = true;
-        screenRenderer.drawLostScreen(score);
-        return;
-    }
-
-    if (lost) {
         screenRenderer.drawLostScreen(score);
         return;
     }

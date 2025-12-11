@@ -1,5 +1,4 @@
 import { getContext, getCanvas } from "./Canvas.js";
-
 import { LoadImage } from "./Utils.js";
 
 export var MapSprites = {};
