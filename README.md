@@ -18,11 +18,11 @@ HolidayHub is a lightweight 2D game designed to run directly in the browser. Pla
 ## Controls
 
 Action - Key
-| Move Up - W / ↑ 
-| Move Down - S / ↓ 
-| Move Left - A / ←
-| Move Right - D / → 
-| Shoot - Space
-| Toggle Shoot - t
+- Move Up - W / ↑
+- Move Down - S / ↓
+- Move Left - A / ←
+- Move Right - D / →
+- Shoot - Space
+- Toggle Shoot - t
 
 *(Controls may vary depending on implementation)*
