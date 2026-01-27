@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login</title>
+</head>
+<body>
+    
+    <form class="auth-form" onsubmit="login(); return false;">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" name="confirm-password" id="confirm-password">
+        <div id="error-message"></div>
+        <button type="submit">Register</button>
+        <h4>Already have an account? <a href="login.html">Login here</a></h4>
+    </form>
+</body>
+
+<script>
+
+    const errorMessageDiv = document.getElementById('error-message');
+
+    async function register() {
+        const username = document.getElementById('username').value.trim();
+        const Email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        if (!username || !password || !Email || !confirmPassword) {
+            showError('Please fill in all fields.');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, Email, password, confirmPassword })
+            });
+
+            if (!response.ok) {
+                if (response.status === 400) {
+                    const data = await response.json();
+                    showError(data.message || 'Registration failed.');
+                    return;
+                }
+                throw new Error('Server error: ' + response.status);
+            }
+
+            // Only redirect if login truly succeeded
+            window.location.href = '/auth/login.html';
+
+        } catch (err) {
+            console.error(err);
+            showError('Server not available. Please try again later.');
+            
+        }
+    }
+    
+    function showError(message) {
+        errorMessageDiv.style.display = 'block';    
+        errorMessageDiv.textContent = message;
+    }
+</script>
+
+</html>

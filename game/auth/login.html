@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login</title>
+</head>
+<body>
+    
+    <form class="auth-form" onsubmit="login(); return false;">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <div id="error-message"></div>
+        <button type="submit">Login</button>
+        <h4>Don't have an account? <a href="register.html">Register here</a></h4>
+    </form>
+</body>
+
+<script>
+
+    const errorMessageDiv = document.getElementById('error-message');
+
+    async function login() {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!username || !password) {
+            showError('Username and password are required.');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    showError('Invalid username or password.');
+                    return;
+                }
+                throw new Error('Server error: ' + response.status);
+            }
+
+            // Only redirect if login truly succeeded
+            window.location.href = '/game';
+
+        } catch (err) {
+            console.error(err);
+            showError('Server not available. Please try again later.');
+            
+        }
+    }
+
+
+    function showError(message) {
+        errorMessageDiv.style.display = 'block';    
+        errorMessageDiv.textContent = message;
+    }
+</script>
+
+</html>
