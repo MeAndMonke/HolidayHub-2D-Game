@@ -24,5 +24,3 @@ Action - Key
 - Move Right - D / →
 - Shoot - Space
 - Toggle Shoot - t
-
-*(Controls may vary depending on implementation)*
